@@ -4,11 +4,11 @@ from fastapi.templating import Jinja2Templates
 import uvicorn
 import asyncio
 import cv2
-from ultralytics import YOLO
+#from ultralytics import YOLO
 
 # Install Fastapi, websockets, Jinja2
 app = FastAPI()
-camera = cv2.VideoCapture(0) #0 for default camera
+camera = cv2.VideoCapture(r"data\2.mp4") #0 for default camera
 
 temp = Jinja2Templates(directory="temp")
 
@@ -27,14 +27,13 @@ async def get_stream(websocket: WebSocket):
                 break
             else:
 
-                model = YOLO("yolov8n.pt")
-                result = model.predict(frame , device =[0] )
+                #model = YOLO("yolov8n.pt")
+                #result = model.predict(frame , device =[0] )
+                #frame = result[0].plot()
 
-                frame = result[0].plot()
-                cv2.rectangle(frame,(10,5),(40,300),(255,0,0),2)
-
+                #cv2.rectangle(frame,(10,5),(40,300),(255,0,0),2)
                 ret, buffer = cv2.imencode('.jpg', frame)
-                await websocket.send_text("WEB CAM PHAM XUAN KY")
+                #await websocket.send_text("WEB CAM PHAM XUAN KY")
                 await websocket.send_bytes(buffer.tobytes())
             await asyncio.sleep(0.03)
     except (WebSocketDisconnect, ConnectionClosed):

@@ -51,6 +51,6 @@ fn dashboard(cookies: &CookieJar<'_>) -> Result<&'static str, Redirect> {
 fn rocket() -> _ {
     rocket::build()
         .mount("/", routes![login, handle_login, dashboard])
-        .mount("/static", FileServer::from(relative!("static")))
+        .mount("/static", FileServer::from("static"))
         .attach(Template::fairing())
 }

@@ -1,0 +1,37 @@
+version: '3.8'
+services:
+  app:
+    build: .
+    ports:
+      - "8000:8000"
+    environment:
+      - DATABASE_URL=postgres://main_user:password@db:5432/users
+      - ROCKET_SECRET_KEY=Sz3o54KFtYJtIB93YK+ZNmoTCh6XaA2/eW/98ItUBLU=
+    networks:
+      - auth-net
+    depends_on:
+      db:
+        condition: service_healthy
+  db:
+    image: postgres:latest
+    environment:
+      - POSTGRES_USER=main_user
+      - POSTGRES_PASSWORD=password
+      - POSTGRES_DB=users
+    volumes:
+      - auth-data:/var/lib/postgresql/data
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+    networks:
+      - auth-net
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U main_user -d users"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+volumes:
+  auth-data:
+networks:
+  auth-net:
+    driver: bridge
+
+

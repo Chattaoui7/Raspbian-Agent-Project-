@@ -5,6 +5,51 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <link rel="stylesheet" href="../static/css/style2.css" />
   <title>Real-Time Detection Output</title>
+  <style>
+    /* Optional fallback if you want to style directly */
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f5f5f5;
+      margin: 0;
+      padding: 0;
+    }
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+    .top-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .btn-back {
+      text-decoration: none;
+      background-color: #007bff;
+      color: white;
+      padding: 8px 12px;
+      border-radius: 4px;
+    }
+    .stream-container {
+      margin-top: 20px;
+    }
+    .stream-box {
+      background-color: white;
+      padding: 10px;
+      border-radius: 6px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+    .stream-title {
+      font-size: 18px;
+      margin-bottom: 10px;
+    }
+    canvas {
+      width: 100%;
+      height: auto;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+  </style>
 </head>
 <body>
   <div class="container">
@@ -14,19 +59,33 @@
     </div>
 
     <div class="stream-container">
+      <!-- Webcam Stream Integration -->
       <div class="stream-box">
-        <div class="stream-title">First Videos</div>
-        <div class="metrics">6.31 / 0.58</div>
-        <div class="ratio">0:1</div>
-      </div>
-      
-      <div class="stream-box">
-        <div class="stream-title">Signed Videos</div>
-        <div class="metrics">6.31 / 0.58</div>
-        <div class="ratio">0:1</div>
+        <div class="stream-title">Webcam Stream</div>
+        <canvas id="video" width="640" height="480"></canvas>
       </div>
     </div>
   </div>
+
+  <script>
+    const canvas = document.getElementById('video');
+    const ctx = canvas.getContext('2d');
+    const ws = new WebSocket('ws://localhost:8000/web');
+
+    ws.onmessage = function(event) {
+      const blob = new Blob([event.data], { type: 'image/jpeg' });
+      const img = new Image();
+      img.onload = function() {
+        ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+        URL.revokeObjectURL(img.src); // Cleanup memory
+      };
+      img.src = URL.createObjectURL(blob);
+    };
+
+    ws.onclose = function() {
+      console.log("WebSocket connection closed");
+    };
+  </script>
 </body>
 </html>
 

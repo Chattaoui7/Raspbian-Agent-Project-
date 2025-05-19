@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="../static/css/style2.css" />
+  <title>Real-Time Detection Output</title>
+</head>
+<body>
+  <div class="container">
+    <div class="top-bar">
+      <h1>Real-Time Detection Output</h1>
+      <a href="/dashboard" class="btn-back">← Back to Dashboard</a>
+    </div>
+
+    <div class="stream-container">
+      <div class="stream-box">
+        <div class="stream-title">First Videos</div>
+        <div class="metrics">6.31 / 0.58</div>
+        <div class="ratio">0:1</div>
+      </div>
+      
+      <div class="stream-box">
+        <div class="stream-title">Signed Videos</div>
+        <div class="metrics">6.31 / 0.58</div>
+        <div class="ratio">0:1</div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
+

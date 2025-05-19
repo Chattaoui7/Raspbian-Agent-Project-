@@ -17,6 +17,9 @@ struct LoginForm {
 }
 
 #[derive(Serialize)]
+struct DashboardContext {}
+
+#[derive(Serialize)]
 struct TemplateContext {
     error: Option<String>,
 }
@@ -62,12 +65,18 @@ async fn handle_login(
 }
 
 #[get("/dashboard")]
-fn dashboard(cookies: &CookieJar<'_>) -> Result<&'static str, Redirect> {
+fn dashboard(cookies: &CookieJar<'_>) -> Result<Template, Redirect> {
+    let context = DashboardContext{};
     if cookies.get_private("authenticated").is_some() {
-        Ok("Welcome to the dashboard!")
+        Ok(Template::render("dashboard", &context))
     } else {
         Err(Redirect::to("/login"))
     }
+}
+#[get("/detection")]
+fn detection()-> Option<Template> {
+    let context = DashboardContext{};
+    Some(Template::render("detection", &context))
 }
 #[launch]
 async fn rocket() -> _ {
@@ -89,7 +98,7 @@ async fn rocket() -> _ {
 
     rocket::build()
         .manage(pool)
-        .mount("/", routes![login, handle_login, dashboard])
+        .mount("/", routes![login, handle_login, dashboard, detection])
         .mount("/static", FileServer::from("static"))
         .attach(Template::fairing())
 }

@@ -1,23 +1,27 @@
-/* Modern gradient background and center alignment */
-body {
+body { 
     margin: 0;
     height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #1a202c;
+    color: #ffffff;
+    font-family: sans-serif;
+    padding: 2rem;
 }
 
 /* Login container styling */
 .login-container {
-    background: rgba(255, 255, 255, 0.95);
+    background-color: #2d3748;  /* dark slate */
     padding: 2.5rem;
-    border-radius: 15px;
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    border-radius: 1rem;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.7);
     width: 100%;
     max-width: 400px;
     transition: transform 0.3s ease;
+    display: flex;
+    flex-direction: column; /* Stack children vertically */
+    align-items: center; /* Center children horizontally */
 }
 
 .login-container:hover {
@@ -26,62 +30,73 @@ body {
 
 /* Form elements styling */
 h1 {
-    color: #2d3748;
+    color: #fff;
     text-align: center;
     margin-bottom: 2rem;
-    font-weight: 600;
+    font-weight: bold;
 }
 
 .form-group {
+    width: 100%; /* Ensure form groups take full width */
     margin-bottom: 1.5rem;
 }
 
 label {
     display: block;
     margin-bottom: 0.5rem;
-    color: #4a5568;
-    font-weight: 500;
+    color: #a0aec0; /* lighter gray */
+    font-weight: 600;
 }
 
 input {
     width: 100%;
     padding: 0.8rem;
-    border: 2px solid #e2e8f0;
-    border-radius: 6px;
+    border: 2px solid #4a5568; /* medium gray-blue */
+    border-radius: 0.5rem;
     font-size: 1rem;
-    transition: border-color 0.3s ease;
+    background-color: #1a202c;
+    color: #e2e8f0; /* light gray text */
+    transition: border-color 0.3s ease, background-color 0.3s ease;
+}
+
+input::placeholder {
+    color: #718096; /* placeholder color */
 }
 
 input:focus {
     outline: none;
-    border-color: #667eea;
-    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+    border-color: #4ade80; /* green accent */
+    background-color: #2d3748;
+    box-shadow: 0 0 8px #4ade80aa;
+    color: #fff;
 }
 
 button {
     width: 100%;
     padding: 1rem;
-    background: #667eea;
-    color: white;
+    background-color: #4ade80; /* green accent */
+    color: #1a202c;
     border: none;
-    border-radius: 6px;
+    border-radius: 0.5rem;
     font-size: 1rem;
-    font-weight: 600;
+    font-weight: 700;
     cursor: pointer;
-    transition: background 0.3s ease;
+    transition: background-color 0.3s ease;
 }
 
 button:hover {
-    background: #764ba2;
+    background-color: #22c55e;
 }
 
 /* Error message styling */
 .error-message {
-    color: #e53e3e;
-    background: #fed7d7;
+    color: #fed7d7; /* light red text */
+    background-color: #742a2a; /* dark red background */
     padding: 1rem;
-    border-radius: 6px;
+    border-radius: 0.5rem;
     margin-bottom: 1.5rem;
     text-align: center;
     border: 1px solid #feb2b2;
+    width: 100%; /* Ensure error message takes full width */
 }
+

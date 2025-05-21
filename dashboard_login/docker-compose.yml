@@ -11,6 +11,14 @@ services:
     depends_on:
       db:
         condition: service_healthy
+  fastapi:
+    build: ./fastapiserver/
+    restart: on-failure
+    ports:
+      - "8020:8000"
+    networks:
+      - auth-net
+  
   db:
     image: postgres:latest
     environment:

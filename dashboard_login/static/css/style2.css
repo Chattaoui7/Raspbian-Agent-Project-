@@ -1,9 +1,7 @@
 #map {
-    height: 400px;
-    border-radius: 1rem;
-  }
-
-/* style.css */
+  height: 400px;
+  border-radius: 1rem;
+}
 
 body {
   background-color: #1a202c;
@@ -14,7 +12,7 @@ body {
 }
 
 .container {
-  max-width: 960px;
+  max-width: 1200px;
   margin: 0 auto;
 }
 
@@ -41,25 +39,59 @@ body {
 
 .stream-container {
   display: flex;
-  gap: 1.5rem;
-  flex-wrap: wrap;
+  gap: 2rem;
+  justify-content: center;
+  flex-wrap: nowrap; /* keep side by side */
 }
 
 .stream-box {
   background-color: #2d3748;
   padding: 1rem;
   border-radius: 1rem;
-  width: calc(50% - 0.75rem);
+  width: 48vw;  /* about half viewport width */
+  max-width: 580px;
+  height: 360px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
 }
 
 .stream-title {
   font-size: 1.25rem;
   font-weight: bold;
   margin-bottom: 0.5rem;
+  text-align: center;
+  color: #fff;
+  user-select: none;
+}
+
+.stream-box canvas {
+  flex-grow: 1;
+  width: 100%;
+  height: 100%;
+  border-radius: 0.5rem;
+  background-color: black;
+  display: block;
+  object-fit: contain;
 }
 
 .metrics,
 .ratio {
   font-size: 1rem;
   margin-top: 0.25rem;
+  text-align: center;
 }
+
+/* Responsive fallback: on smaller screens stack vertically */
+@media (max-width: 700px) {
+  .stream-container {
+    flex-wrap: wrap;
+  }
+  .stream-box {
+    width: 90vw;
+    height: 280px;
+  }
+}
+

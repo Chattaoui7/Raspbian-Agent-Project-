@@ -102,4 +102,3 @@ async fn rocket() -> _ {
         .mount("/static", FileServer::from("static"))
         .attach(Template::fairing())
 }
-

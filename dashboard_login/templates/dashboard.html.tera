@@ -18,10 +18,7 @@
     <div class="col-span-4 bg-gray-800 p-4 rounded-xl shadow-lg">
       <h2 class="text-lg font-semibold mb-2">Drone Stats</h2>
       <ul class="space-y-1">
-        <li>Battery: 92%</li>
-        <li>Altitude: 140 m</li>
-        <li>Speed: 12.3 m/s</li>
-        <li>Flight Mode: AUTO</li>
+        <li>CPU Temperature: <span id="cpu-temp" class="text-yellow-400">Loading...</span></li>
       </ul>
     </div>
 

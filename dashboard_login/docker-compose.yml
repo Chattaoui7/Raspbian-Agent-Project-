@@ -11,6 +11,13 @@ services:
     depends_on:
       db:
         condition: service_healthy
+  relay:
+    build: ./socket_serv/
+    ports:
+      - "8500:8500"
+    networks :
+      - auth-net
+    
   fastapi:
     build: ./fastapiserver/
     restart: on-failure

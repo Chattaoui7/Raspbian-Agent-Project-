@@ -113,3 +113,24 @@ setInterval(() => {
   batteryChart.update();
   altitudeChart.update();
 }, 2000); // Updates every 2 seconds
+ const cpuTempSpan = document.getElementById("cpu-temp");
+  const socket = new WebSocket("ws://localhost:8500");
+
+  socket.onopen = () => {
+    console.log("WebSocket connection established.");
+  };
+
+  socket.onmessage = (event) => {
+    console.log("Received temperature:", event.data);
+    cpuTempSpan.textContent = event.data + " °C";
+  };
+
+  socket.onerror = (error) => {
+    console.error("WebSocket error:", error);
+    cpuTempSpan.textContent = "Error";
+  };
+
+  socket.onclose = () => {
+    console.warn("WebSocket closed.");
+    cpuTempSpan.textContent = "Disconnected";
+  };

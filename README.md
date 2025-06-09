@@ -24,5 +24,5 @@ Components:
 4. **Web Client** - Dashboard interface
 
 # Deploy 
-cd dashboard_login
+cd dashboard_login  
 docker compose up 

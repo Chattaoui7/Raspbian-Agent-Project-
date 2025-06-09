@@ -15,8 +15,9 @@ services:
     build: ./socket_serv/
     ports:
       - "8500:8500"
-    networks :
+    networks:
       - auth-net
+    restart: on-failure
     
   fastapi:
     build: ./fastapiserver/
